@@ -15,7 +15,7 @@ foreach ($sinhVien as $sv) {
 
     // kiem tra diem va dua ra danh gia
     if ($sv["diem"] >= 80) {
-        echo "Danh gia: Xuat sac <br>";
+        echo "Danh gia: Xuất sắc <br>";
     } elseif ($sv["diem"] >= 70) {
         echo "Danh gia: Kha <br>";
     } elseif ($sv["diem"] >= 60) {
