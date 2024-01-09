@@ -10,7 +10,9 @@ if ($myDB->connect_error)
 $sql = "SELECT * FROM books WHERE available = 1 ORDER BY title";
 $result = $myDB->query($sql);
 ?>
+<!-- day la de ket noi toi database library-->
 
+<h1> Hoang Minh Hieu test ❤️</h1>
 <table cellSpacing="2" cellPadding="6" align="center" border="1">
     <tr>
         <td colspan="4">
