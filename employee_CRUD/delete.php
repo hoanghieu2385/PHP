@@ -1,11 +1,17 @@
 <?php
 global $link;
 if (isset($_POST["id"]) && !empty($_POST["id"])){
+    // import file config
     require_once 'configure.php';
+    // truy van toi doi tuong
     $sql = "DELETE FROM employees WHERE id = ?";
-    if ($stmt = mysqli_prepare($link, $sql)){
+
+    if ($stmt = mysqli_prepare($link, $sql)){           // lay link cua config
+        // truyen tham so voi kieu i <integer>
         mysqli_stmt_bind_param($stmt, "i", $param_id);
+        // truyen id vao parameter. trim de xoa khoang trong de tranh bi loi
         $param_id = trim($_POST["id"]);
+
         if (mysqli_stmt_execute($stmt)){
             header("location: index.php");
             exit();
@@ -16,6 +22,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])){
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);
+    // dong ket noi server
 }else{
     if(empty(trim($_GET["id"]))){
         header("location: error.php");
@@ -46,10 +53,12 @@ if (isset($_POST["id"]) && !empty($_POST["id"])){
                 </div>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <div class="alter alter-danger fade in">
+                    <!-- neu gui thi se gui du lieu toi index  -->
                         <input type="hidden" name="id" value="<?php echo trim($_GET["id"]);?>"/>
                         <p>Are u sure u want to delete this record</p><br>
                         <p>
                             <input type="submit" value="Yes" class="btn btn-danger">
+                            <!-- neu khong muon xoa thi quay ve trang index    -->
                             <a href="index.php" class="btn btn-default">No</a>
                         </p>
                     </div>

@@ -1,13 +1,20 @@
 <?php
 global $link;
-if (isset($_GET["id"]) && !empty($_GET["id"])) {
+if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {              // lay id va xoa khoang trong thua ra bang ham trim
+    // import file config
     require_once 'configure.php';
+    // truy van toi doi tuong
     $sql = "SELECT * FROM employees WHERE id = ?";
-    if ($stmt = mysqli_prepare($link, $sql)) {
+
+    if ($stmt = mysqli_prepare($link, $sql)) {          // lay link cua config
+        // truyen tham so voi kieu i <integer>
         mysqli_stmt_bind_param($stmt, "i", $param_id);
+        // truyen id vao parameter. trim de xoa khoang trong de tranh bi loi
         $param_id = trim($_GET["id"]);
+
         if (mysqli_stmt_execute($stmt)){
             $result = mysqli_stmt_get_result($stmt);
+
             if (mysqli_num_rows($result) ==1){
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 $name = $row["name"];
@@ -23,8 +30,9 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);
+    // dong server cho do ton tai nguyen
 }else{
-    header("location : error.php");
+    header("location : error.php");     // kiem tra neu loi thi se hien thi file error
     exit();
 }
 ?>

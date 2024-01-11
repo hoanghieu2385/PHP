@@ -1,9 +1,10 @@
 <?php
 global $link;
-require_once 'configure.php';
+require_once 'configure.php';           // yeu cau file config
 
+// dinh nghia cac bien
 $name = $address = $salary = "";
-$name_err = $address_err = $salary_err = "";
+$name_err = $address_err = $salary_err = "";            // neu co loi thi se luu thong bao loi
 
 if(isset($_POST["id"])&& !empty($_POST["id"])){
 
@@ -35,11 +36,12 @@ if(isset($_POST["id"])&& !empty($_POST["id"])){
     }
 
     if (empty($name_err) && empty($address_err) &&empty($salary_err)){
+        // thay doi name, address, salary du theo id da chon
         $sql = "UPDATE employees SET name=?, address=?, salary=? WHERE id=?";
 
         if ($stmt = mysqli_prepare($link, $sql)){
+            // co 4 tham so thi 3 cai dau la string (s) va cai cuoi la so thi la integer (i)
             mysqli_stmt_bind_param($stmt,"sssi",$param_name, $param_address, $param_salary, $param_id);
-
             $param_name=$name;
             $param_address = $address;
             $param_salary = $salary;
@@ -56,7 +58,9 @@ if(isset($_POST["id"])&& !empty($_POST["id"])){
         mysqli_stmt_close($stmt);
     }
     mysqli_close($link);
-} else{
+    // dong ket noi
+
+} else{ // lan dau up len thi se dung ham get de lay du lieu
     if (isset($_GET["id"])&& !empty(trim($_GET["id"]))){
         $id = trim($_GET["id"]);
 
@@ -64,6 +68,7 @@ if(isset($_POST["id"])&& !empty($_POST["id"])){
         if ($stmt = mysqli_prepare($link, $sql)){
             mysqli_stmt_bind_param($stmt, "i", $param_id);
             $param_id= $id;
+
             if (mysqli_stmt_execute($stmt)){
                 $result = mysqli_stmt_get_result($stmt);
 
@@ -76,12 +81,15 @@ if(isset($_POST["id"])&& !empty($_POST["id"])){
                     header("location: error.php");
                     exit();
                 }
+
             }else{
                 echo "Oops!! Something went wrong, try again later.";
             }
         }
         mysqli_stmt_close($stmt);
         mysqli_close($link);
+        // dong ket noi
+
     }else{
         header("location : error.php");
         exit();
@@ -115,22 +123,30 @@ if(isset($_POST["id"])&& !empty($_POST["id"])){
                     <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
                         <label>Name</label>
                         <label>
+                        <!-- Neu co du lieu phu hop thi se duoc them vao name qua ham echo $name  -->
                             <input type="text" name="name" class="form-control" value="<?php echo $name; ?>">
                         </label>
+                        <!-- Du lieu khong phu hop thi se duoc in ra loi va bang mau do  -->
                         <span class="help-block"><?php echo $name_err?></span>
                     </div>
+
                     <div class="form-group <?php echo (!empty($address_err))? 'has-error' : '';?>">
                         <label>Address</label>
                         <label>
+                            <!-- Neu co du lieu phu hop thi se duoc them vao address qua ham echo $address  -->
                             <textarea name="address" class="form-control"><?php echo $address;?></textarea>
                         </label>
+                        <!-- Du lieu khong phu hop thi se duoc in ra loi va bang mau do  -->
                         <span class="help-block"><?php echo $address_err;?></span>
                     </div>
+
                     <div class="form-group <?php echo (!empty($salary_err))? 'has-error': '';?>">
                         <label>Salary</label>
                         <label>
+                            <!-- Neu co du lieu phu hop thi se duoc them vao salary qua ham echo $salary  -->
                             <input type="text" name="salary" class="form-control" value="<?php echo $salary;?>">
                         </label>
+                        <!-- Du lieu khong phu hop thi se duoc in ra loi va bang mau do  -->
                         <span class="help-block"><?php echo $salary_err;?></span>
                     </div>
                     <input type="hidden" name="id" value="<?php echo $id;?>"/>
