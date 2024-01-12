@@ -36,7 +36,7 @@ if(isset($_POST["id"])&& !empty($_POST["id"])){
             $param_id = $id;
 
             if (mysqli_stmt_execute($stmt)){
-                header("location:index.php");
+                header("location:gallery.php");
                 exit();
             }else{
                 echo "Something went Wrong. Please try again later";

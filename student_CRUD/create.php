@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
             $param_name=$name;
             $param_email = $email;
             if (mysqli_stmt_execute($stmt)){
-                header("location:index.php");
+                header("location:gallery.php");
                 exit();
             }else{
                 echo "Something went Wrong. Please try again later";
