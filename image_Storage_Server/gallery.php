@@ -1,6 +1,5 @@
 <?php
 global $conn;
-session_start();
 $_SESSION['username'] = "Admin";
 ?>
 
@@ -18,7 +17,7 @@ $_SESSION['username'] = "Admin";
     <a href="index.html" class="header-brand">Mhiu</a>
     <nav>
         <ul>
-            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="portfolio.html">Hoang Minh Hieu</a></li>
             <li><a href="about.html">About me</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -56,7 +55,7 @@ $_SESSION['username'] = "Admin";
         <?php
         if (isset($_SESSION['username'])) {
             echo '<div class="gallery-upload">
-            <h2>Upload</h2>
+            <h2>Upload</h2> 
             <form action ="includes/gallery-upload.inc.php" method="post" enctype="multipart/form-data">
                 <input type="text" name="filename" placeholder="File name...">
                 <input type="text" name="filetitle" placeholder="File title...">

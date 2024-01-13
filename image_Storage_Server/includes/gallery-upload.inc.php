@@ -1,7 +1,9 @@
 <?php
 
 global $conn;
+
 if (isset($_POST['submit'])) {
+
     $newFileName = $_POST['filename'];
     if (empty($newFileName)) {
         $newFileName = "gallery";
@@ -26,7 +28,7 @@ if (isset($_POST['submit'])) {
 
     if (in_array($fileActuaExt, $allowed)) {
         if ($fileError === 0) {
-            if ($fileSize < 2000000) {
+            if ($fileSize < 7000000) {
                 $imageFullName = $newFileName . "." . uniqid("", true) . "." . $fileActuaExt;
                 $fileDestination = "../img/gallery/" . $imageFullName;
 
