@@ -1,23 +1,23 @@
 <?php
 global $conn;
-$_SESSION['username'] = "Admin";
+$_SESSION['username'] = "root";
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Image Storage Server</title>
+    <meta charset="UTF-8">
+    <title> My Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
-    <a href="index.html" class="header-brand">Mhiu</a>
+    <a href="index.html" class="header-brand">mmtuts</a>
     <nav>
         <ul>
-            <li><a href="portfolio.html">Hoang Minh Hieu</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
             <li><a href="about.html">About me</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -28,12 +28,12 @@ $_SESSION['username'] = "Admin";
     <section class="gallery-links">
         <div class="wrapper">
             <h2>Gallery</h2>
-        
-            <div class="gallery-links">
+
+            <div class="gallery-container">
                 <?php
                 include_once 'includes/dbh.inc.php';
-            
-                $sql = "Select * From gallery order by orderGallery DESC; ";
+
+                $sql = "SELECT * FROM gallery ORDER BY orderGallery DESC; ";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     echo "SQL statement failed";
@@ -43,33 +43,31 @@ $_SESSION['username'] = "Admin";
 
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo '<a href="#">
-                            <div style="background-image: url(img/gallery/'.$row["imgFullNameGallery"].');"</div>
+                            <div style="background-image: url(img/gallery/'.$row["imgFullNameGallery"].');"></div>
                             <h3>'.$row["titleGallery"].'</h3>
                             <p>'.$row["descGallery"].'</p>
                             </a>';
                             }
                         }
-            ?>
-        </div>
+                ?>
+            </div>
 
-        <?php
-        if (isset($_SESSION['username'])) {
-            echo '<div class="gallery-upload">
-            <h2>Upload</h2> 
-            <form action ="includes/gallery-upload.inc.php" method="post" enctype="multipart/form-data">
-                <input type="text" name="filename" placeholder="File name...">
-                <input type="text" name="filetitle" placeholder="File title...">
-                <input type="text" name="filedesc" placeholder="File description...">
-                <input type="file" name="file">
-                <button type="submit" name="submit">Upload</button>
-            </form>
+            <?php
+                if (isset($_SESSION['username'])) {
+                    echo '<div class="gallery-upload">
+                    <h2>Upload</h2>
+                    <form action ="includes/gallery-upload.inc.php" method="post" enctype="multipart/form-data">
+                        <input type="text" name="filename" placeholder="File name...">
+                        <input type="text" name="filetitle" placeholder="File title...">
+                        <input type="text" name="filedesc" placeholder="File description...">
+                        <input type="file" name="file">
+                        <button type="submit" name="submit">Upload</button>
+                    </form>
             </div>';
         }
         ?>
-
         </div>
-        </section>
-
+    </section>
 </main>
 <div class="wrapper">
     <footer>
@@ -102,3 +100,5 @@ $_SESSION['username'] = "Admin";
 </div>
 </body>
 </html>
+
+
