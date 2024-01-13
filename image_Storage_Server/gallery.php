@@ -14,7 +14,7 @@ $_SESSION['username'] = "root";
 </head>
 <body>
 <header>
-    <a href="index.html" class="header-brand">mmtuts</a>
+    <a href="index.html" class="header-brand">Mhius</a>
     <nav>
         <ul>
             <li><a href="portfolio.html">Portfolio</a></li>
